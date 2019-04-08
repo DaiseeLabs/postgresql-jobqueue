@@ -1,0 +1,42 @@
+name:                postgresql-jobqueue
+version:             0.1.0.0
+license:             AllRightsReserved
+author:              "Christian Marie"
+maintainer:          "christian@daisee.com"
+copyright:           "Daisee Pty Ltd"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+description:         "PostgreSQL job queue"
+
+ghc-options: -Werror -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
+
+dependencies:
+- base >= 4.7 && < 5
+- uuid
+- postgresql-simple
+
+library:
+  source-dirs: lib
+  dependencies:
+    - monad-control
+    - bytestring
+    - optparse-applicative
+    - heavy-logger
+
+tests:
+  integration:
+    main:                Main.hs
+    source-dirs:         test/integration/
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - uuid-quasi
+    - hspec
+    - hspec-core
+    - async
+    - postgresql-jobqueue
